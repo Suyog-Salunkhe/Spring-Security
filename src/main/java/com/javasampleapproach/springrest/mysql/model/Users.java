@@ -1,9 +1,9 @@
 package com.javasampleapproach.springrest.mysql.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,9 +18,12 @@ public class Users{
 	@Column(name = "password")
 	private int password;
 
-	@Column(name = "enabled")
-	private boolean enabled;
+	@Column(name = "active")
+	private char active;
 
+	@Column(name = "last_login")
+	Date lastLogin;
+	
 	public String getUsername() {
 		return username;
 	}
@@ -37,12 +40,22 @@ public class Users{
 		this.password = password;
 	}
 
-	public boolean isEnabled() {
-		return enabled;
+
+
+	public char getActive() {
+		return active;
 	}
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
+	public void setActive(char active) {
+		this.active = active;
+	}
+
+	public Date getLastLogin() {
+		return lastLogin;
+	}
+
+	public void setLastLogin(Date lastLogin) {
+		this.lastLogin = lastLogin;
 	}
 
 	

@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.javasampleapproach.springrest.mysql.repo.UsersRepository;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")
 public class UserController {
 
 	@Autowired
-	UsersRepository repository;
+	UsersRepository userRepository;
 
-	@PostMapping("/y")
+	@PostMapping("/login")
 	public ResponseEntity<String> login(@RequestBody String username) {
 		System.out.println("Welcome " + username);
+		userRepository.findByUsername(username);
 		return new ResponseEntity<String>(username, HttpStatus.OK);
 	}
 	
@@ -30,12 +30,4 @@ public class UserController {
 	public String user() {
 		return "<h1>Welcome user <h1>";
 	}
-
-	
-	@PostMapping("/login")
-	public String admin() {
-		return "<h1>Welcome admin<h1>";
-	}
-	
-
 }
