@@ -16,13 +16,16 @@ public class Users{
 	private String username;
 
 	@Column(name = "password")
-	private int password;
+	private String password;
 
 	@Column(name = "active")
 	private char active;
 
 	@Column(name = "last_login")
 	Date lastLogin;
+	
+	@Column(name = "roles")
+    private String roles;
 	
 	public String getUsername() {
 		return username;
@@ -32,11 +35,11 @@ public class Users{
 		this.username = username;
 	}
 
-	public int getPassword() {
+	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(int password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 
@@ -58,5 +61,14 @@ public class Users{
 		this.lastLogin = lastLogin;
 	}
 
+	public String getRoles() {
+		return roles;
+	}
+
+	public void setRoles(String roles) {
+		this.roles = roles;
+	}
+
+	
 	
 }
