@@ -15,13 +15,17 @@ public class CustomUserDetails implements UserDetails {
 	
 	private String userName;
 	private String password;
-	private char active;
+	private boolean active;
 	private List<GrantedAuthority> authorities;
 	
 	public CustomUserDetails(Users user) {
 		this.userName = user.getUsername();
 	    this.password = user.getPassword();
-	    this.active = user.getActive();
+	    if(user.getActive()== 'A')
+	    	this.active = true;
+	    else
+	    	this.active = false;
+	    
 	    this.authorities = Arrays.stream(user.getRoles().split(","))
 	                    .map(SimpleGrantedAuthority::new)
 	                    .collect(Collectors.toList());
@@ -30,43 +34,41 @@ public class CustomUserDetails implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		
-		return this.getAuthorities();
+		return this.authorities;
 	}
 
 	@Override
 	public String getPassword() {
-		
-		return this.getPassword();
+		return this.password;
 	}
 
 	@Override
 	public String getUsername() {
 		
-		return this.getUsername();
+		return this.userName;
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
 		
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
 		
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
 		
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		
-		return false;
+		return active;
 	}
 	
 }

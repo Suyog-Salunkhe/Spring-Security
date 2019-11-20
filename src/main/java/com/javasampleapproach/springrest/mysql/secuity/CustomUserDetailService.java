@@ -1,6 +1,9 @@
 package com.javasampleapproach.springrest.mysql.secuity;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -32,12 +35,12 @@ public class CustomUserDetailService implements UserDetailsService{
     @Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-    	Users user = (Users) userRepository.findByUsername(username);
+    	List<Users> users = userRepository.findByUsername(username);
 		
-		if (user == null) {
+		if (users == null) {
             throw new UsernameNotFoundException(username);
         }
-        return new CustomUserDetails(user);   
+        return new CustomUserDetails(users.get(0));   
 	}
 
 }

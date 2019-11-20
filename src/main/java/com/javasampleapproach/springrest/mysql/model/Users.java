@@ -12,6 +12,9 @@ import javax.persistence.Table;
 public class Users{
 
 	@Id
+	@Column(name="id")
+	private int id;
+	
 	@Column(name = "username")
 	private String username;
 
@@ -27,6 +30,17 @@ public class Users{
 	@Column(name = "roles")
     private String roles;
 	
+	@Column
+	private boolean enabled;
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -68,6 +82,16 @@ public class Users{
 	public void setRoles(String roles) {
 		this.roles = roles;
 	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	
+	
 
 	
 	

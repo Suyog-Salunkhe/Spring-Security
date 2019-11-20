@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.javasampleapproach.springrest.mysql.repo.UsersRepository;
 
 @RestController
-@RequestMapping("/api")
 public class UserController {
 
 	@Autowired
@@ -30,4 +29,15 @@ public class UserController {
 	public String user() {
 		return "<h1>Welcome user <h1>";
 	}
+	
+	@GetMapping("/")
+	public String home() {
+	    return ("<h1>Welcome</h1>");
+	}
+
+	@GetMapping("/admin")
+	public String admin() {
+	    return ("<h1>Welcome Admin</h1>");
+	}
+	    
 }
