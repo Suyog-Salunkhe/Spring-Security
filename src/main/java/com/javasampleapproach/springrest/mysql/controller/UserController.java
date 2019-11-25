@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.javasampleapproach.springrest.mysql.repo.UsersRepository;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class UserController {
 
 	@Autowired
 	UsersRepository userRepository;
 
-	@PostMapping("/login")
+	@PostMapping("/go")
 	public ResponseEntity<String> login(@RequestBody String username) {
 		System.out.println("Welcome " + username);
 		userRepository.findByUsername(username);

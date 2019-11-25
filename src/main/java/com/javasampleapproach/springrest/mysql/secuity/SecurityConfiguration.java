@@ -31,17 +31,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Autowired
     private UserDetailsService userDetailService;
     
-	/*@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		
-		auth.jdbcAuthentication().dataSource(dataSource)
-		.usersByUsernameQuery(
-				"select username,password, enabled from users where username=?")
-			.authoritiesByUsernameQuery(
-				"select username, role from user_roles where username=?");
-	}
-	*/
-
 	@PostConstruct
     public void completeSetup() {
         userDetailService = applicationContext.getBean(CustomUserDetailService.class);
@@ -81,11 +70,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		http.authorizeRequests()
+		http.csrf().disable().authorizeRequests()
         .antMatchers("/admin").hasRole("ADMIN")
         .antMatchers("/user").hasAnyRole("ADMIN", "USER")
         .antMatchers("/").permitAll()
-        .and().formLogin();
+        .and().formLogin().loginProcessingUrl("go");
 		
 		/* http.authorizeRequests()
          .antMatchers("/api/login")
