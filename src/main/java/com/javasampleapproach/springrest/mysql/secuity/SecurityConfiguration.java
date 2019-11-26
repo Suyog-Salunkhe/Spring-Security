@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.web.context.WebApplicationContext;
 
 @EnableWebSecurity
@@ -25,8 +26,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Autowired
     private WebApplicationContext applicationContext;
 
-	@Autowired
-	private AuthenticationSuccessHandlerImpl successHandler;
+	/*@Autowired
+	private AuthenticationSuccessHandlerImpl successHandler;*/
 	 
 	@Autowired
     private UserDetailsService userDetailService;
@@ -66,6 +67,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	public PasswordEncoder passwordEncoder() {
 		return NoOpPasswordEncoder.getInstance();
 	}
+	
+	@Bean
+	public AuthenticationSuccessHandlerImpl successHandler() {
+		AuthenticationSuccessHandlerImpl handler = new AuthenticationSuccessHandlerImpl();
+	    handler.setUseReferer(true);
+	    return handler;
+	}
 	  
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -74,7 +82,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         .antMatchers("/admin").hasRole("ADMIN")
         .antMatchers("/user").hasAnyRole("ADMIN", "USER")
         .antMatchers("/").permitAll()
-        .and().formLogin().loginProcessingUrl("go");
+		.and().formLogin()
+		.successHandler(successHandler())
+		.and().logout();
+        //.and().formLogin().loginProcessingUrl("go");
 		
 		/* http.authorizeRequests()
          .antMatchers("/api/login")
