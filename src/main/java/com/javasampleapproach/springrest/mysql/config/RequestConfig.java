@@ -1,4 +1,4 @@
-package com.javasampleapproach.springrest.mysql.filter;
+package com.javasampleapproach.springrest.mysql.config;
 
 
 import org.springframework.context.annotation.Bean;
