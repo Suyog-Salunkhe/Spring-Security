@@ -63,7 +63,7 @@ public class UserController {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
 		}catch (BadCredentialsException be) {
-			throw new Exception("Incorrect Username or password", be);
+			return new ResponseEntity<>("Incorrect Username or password",HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		final UserDetails userDetails =  customUserDetailService.loadUserByUsername(authRequest.getUsername());
