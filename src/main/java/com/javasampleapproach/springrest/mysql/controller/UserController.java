@@ -38,13 +38,12 @@ public class UserController {
 	@PostMapping("/go")
 	public ResponseEntity<String> login(@RequestBody String username) {
 		System.out.println("Welcome " + username);
-		userRepository.findByUsername(username);
 		return new ResponseEntity<String>(username, HttpStatus.OK);
 	}
 	
-	@GetMapping("/user")
-	public String user() {
-		return "Welcome ";
+	@PostMapping("/user")
+	public ResponseEntity<?> user() {
+		return ResponseEntity.ok(new String("Welcome admin"));
 	}
 	
 	@GetMapping("/")
@@ -53,8 +52,8 @@ public class UserController {
 	}
 
 	@GetMapping("/admin")
-	public String admin() {
-	    return ("<h1>Welcome Admin</h1>");
+	public ResponseEntity<?> admin() {
+	    return ResponseEntity.ok("<h1>Welcome Admin</h1>");
 	}
 	
 	@PostMapping("/jwt")
