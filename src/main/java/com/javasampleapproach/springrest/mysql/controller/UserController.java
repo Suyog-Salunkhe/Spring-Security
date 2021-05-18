@@ -19,7 +19,7 @@ import com.javasampleapproach.springrest.mysql.repo.UsersRepository;
 import com.javasampleapproach.springrest.mysql.secuity.CustomUserDetailService;
 import com.javasampleapproach.springrest.mysql.util.JwtUtil;
 
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class UserController {
 
